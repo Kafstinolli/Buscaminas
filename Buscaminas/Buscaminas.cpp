@@ -92,3 +92,31 @@ void limpiarTablero() {
 		}
 	}
 }
+
+void dificultadPartida(int dificultad){
+	
+	switch (dificultad)
+	{
+	case 1:
+		columnasJuego = 10;
+		filasJuego = 8;
+		minasJuego = 10;
+		break;
+
+	case 2:
+		columnasJuego = 18;
+		filasJuego = 14;
+		minasJuego = 40;
+		break;
+
+	case 3:
+		columnasJuego = 20;
+		filasJuego = 20;
+		minasJuego = 99;
+		break;
+	
+	default:
+		break;
+	}
+	banderasRestantesJuego = minasJuego;
+}
