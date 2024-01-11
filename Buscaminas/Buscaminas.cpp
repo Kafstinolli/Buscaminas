@@ -25,10 +25,12 @@ char tableroInvisible[20][20];
 void calcularMinasAlrededor();
 int verificarPartida();
 void limpiarTablero();
+void dificultadPartida(int dificultad);
+void ponerMinas();
+
+int numeroAleatoreo();
 
 int main() {
-
-
 
 
 
@@ -119,4 +121,22 @@ void dificultadPartida(int dificultad){
 		break;
 	}
 	banderasRestantesJuego = minasJuego;
+}
+
+void ponerMinas(){
+
+	int contadorMinas = 0;
+	int coordenadasColumnas;
+	int coordenadasFilas;
+
+	while (contadorMinas < minasJuego){}
+	{
+		coordenadasColumnas = numeroAleatoreo() % columnasJuego;
+		coordenadasFilas = numeroAleatoreo() % filasJuego;
+		if(tableroInvisible[coordenadasFilas][coordenadasColumnas] == '.'){
+			tableroInvisible[coordenadasFilas][coordenadasColumnas] = 'M';
+			contadorMinas++;
+		}
+	}
+	
 }
