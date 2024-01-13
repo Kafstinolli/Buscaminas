@@ -31,6 +31,10 @@ void ponerBandera(int fila, int columna);
 void estadisticas();
 void mostrarTablero();
 void abrirCelda(int fila, int columna);
+void ponerTablero();
+void pintarColumnasArriba();
+void pintarColumnasDecenas();
+void pintarColumnasUnidades();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -153,6 +157,70 @@ void ponerMinas(){
 			contadorMinas++;
 		}
 	}	
+}
+
+void ponerTablero(){
+	 pintarColumnasArriba();
+	 for(int fila = 0; fila < filasJuego; fila++){
+		ponerNumerosFila(fila);
+		for(int columna = 0; columna < columnasJuego; columna++){
+		cout << tableroVisible[fila][columna] << ' ';
+		}
+		if(activarTruco){
+			cout << "     ";
+			ponerNumerosFila(fila);
+			for(int columna = 0; columna < columnasJuego; columna++){
+				cout << tableroInvisible[fila][columna] << ' ';
+			}
+		}
+		cout << "\n";
+	 }
+}
+
+void pintarColumnasArriba(){
+
+	cout << "     ";
+	string separarLinea;
+	for(int c = 0; c <(columnasJuego * 2) - 1; c++){
+		separarLinea += "-";
+	}
+	pintarColumnasDecenas();
+	if(activarTruco){
+		cout << "          ";
+		pintarColumnasDecenas();
+	}
+	cout << "\n";
+
+	cout << "      ";
+	pintarColumnasUnidades();
+	if(activarTruco){
+		cout << "        ";
+		pintarColumnasUnidades;
+	}
+	cout << "\n     " + separarLinea;
+	if(activarTruco){
+		cout << "            " + separarLinea;
+	}
+	cout << "\n";
+}
+
+void pintarColumnasDecenas(){
+
+	for(int i = 0; i < columnasJuego; i++){
+		if(i % 10 == 9){
+			cout << ((i + 1) / 10) % 10 << ' ';
+		}
+		else{
+			cout << "  ";
+		}
+	}
+}
+
+void pintarColumnasUnidades(){
+
+	for(int i = 0; i < columnasJuego; i++){
+		cout << (i + 1) % 10 << ' ';
+	}
 }
 
 void ponerNumerosFila(int fila){
