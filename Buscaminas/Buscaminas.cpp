@@ -29,6 +29,7 @@ void ponerMinas();
 void ponerNumerosFila(int fila);
 void mostrarCelda(int fila, int columna);
 void ponerBandera(int fila, int columna);
+void estadisticas();
 
 int numeroAleatoreo();
 
@@ -188,4 +189,17 @@ void ponerBandera(int fila, int columna){
 			banderasRestantesJuego--;
 		}
 	}
+}
+
+void estadisticas(){
+
+	ofstream myfile ("stats");
+	if(myfile.is_open())
+	{
+		myfile << "Ganadas," << juegosGanados << "\n";
+		myfile << "Perdidas," << juegosPerdidos << "n";
+		myfile << "Canceladas," << juegosCancelados << "\n";
+		myfile.close();
+	}
+	else cout << "No se puede actualizar estadisticas. \n\n";
 }
