@@ -40,6 +40,7 @@ void finalizarJuego();
 void ingresarCoordenadas(int inicio, int fin);
 void crearEstadisticas();
 void iniciarTablero();
+void tableroDificultad(int nivel);
 
 int verificarPartida();
 int verificarCoordenada();
@@ -152,6 +153,32 @@ void iniciarTablero(){
 	limpiarTablero();
 	ponerMinas();
 	calcularMinasAlrededor();
+}
+
+void tableroDificultad(int nivel){
+
+	switch (nivel)
+	{
+	case 1:
+		columnasJuego = 10;
+		filasJuego = 8;
+		minasJuego = 10;
+		break;
+
+	case 2:
+		columnasJuego = 18;
+		filasJuego = 14;
+		minasJuego = 40;
+		break;
+
+	case 3:
+		columnasJuego = 20;
+		filasJuego = 20;
+		minasJuego = 99;
+		break;
+	}
+
+	banderasRestantesJuego = minasJuego;
 }
 
 void dificultadPartida(int dificultad){
