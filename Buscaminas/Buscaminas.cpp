@@ -41,6 +41,8 @@ void ingresarCoordenadas(int inicio, int fin);
 void crearEstadisticas();
 void iniciarTablero();
 void tableroDificultad(int nivel);
+void menuDificultad();
+void menuInicio();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -308,6 +310,34 @@ void finalizarJuego(){
 void ingresarCoordenadas(int inicio, int fin){
 
 	cout << "ingrese un numero entre " << inicio << " and " << fin << ".\n\n";
+}
+
+void menuDificultad(){
+
+	menuInicio();
+	cout << endl;
+	cout << "seleccione la dificultad del juego:\n";
+	cout << "1. Facil \n";
+	cout << "2. Medio \n";
+	cout << "3. Dificil \n";
+}
+
+void menuJuego(){
+
+	menuInicio();
+	
+
+}
+
+void menuInicio(){
+
+	cout << "*************buscaminas************" << endl;
+	
+}
+void mostrarEstadisticas(){
+
+	cout << "digite cualquiere numero paar regresar al menu principal.\n" << endl; 
+
 }
 
 void ponerNumerosFila(int fila){
