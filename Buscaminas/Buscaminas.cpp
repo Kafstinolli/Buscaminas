@@ -21,17 +21,16 @@ string estadisticas[3][2];
 char tableroVisible[20][20];
 char tableroInvisible[20][20];
 
-
 void calcularMinasAlrededor();
 int verificarPartida();
 void limpiarTablero();
 void dificultadPartida(int dificultad);
 void ponerMinas();
+void ponerNumerosFila(int fila);
 
 int numeroAleatoreo();
 
 int main() {
-
 
 
 }
@@ -137,6 +136,17 @@ void ponerMinas(){
 			tableroInvisible[coordenadasFilas][coordenadasColumnas] = 'M';
 			contadorMinas++;
 		}
+	}	
+}
+
+void ponerNumerosFila(int fila){
+
+	if(fila % 10 == 9){
+		cout << ((fila + 1) / 10) % 1;
 	}
-	
+	else{
+		cout << '  ';
+	}
+	cout << (fila + 1) % 10 << " | ";
+
 }
