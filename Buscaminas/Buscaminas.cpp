@@ -35,6 +35,8 @@ void ponerTablero();
 void pintarColumnasArriba();
 void pintarColumnasDecenas();
 void pintarColumnasUnidades();
+void finalizarJuego();
+void ingresarCoordenadas(int inicio, int fin);
 
 int verificarPartida();
 int verificarCoordenada();
@@ -221,6 +223,16 @@ void pintarColumnasUnidades(){
 	for(int i = 0; i < columnasJuego; i++){
 		cout << (i + 1) % 10 << ' ';
 	}
+}
+
+void finalizarJuego(){
+
+	cout << "a finalizado el juego. \n";
+}
+
+void ingresarCoordenadas(int inicio, int fin){
+
+	cout << "ingrese un numero entre " << inicio << " and " << fin << ".\n\n";
 }
 
 void ponerNumerosFila(int fila){
