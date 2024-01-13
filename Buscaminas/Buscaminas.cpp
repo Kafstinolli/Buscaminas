@@ -27,6 +27,7 @@ void limpiarTablero();
 void dificultadPartida(int dificultad);
 void ponerMinas();
 void ponerNumerosFila(int fila);
+void mostrarCelda(int fila, int columna);
 
 int numeroAleatoreo();
 
@@ -148,10 +149,28 @@ void ponerNumerosFila(int fila){
 		cout << '  ';
 	}
 	cout << (fila + 1) % 10 << " | ";
-
 }
 
 int numeroAleatoreo(){
 
 	return rand();
+}
+
+void mostrarCelda(int fila, int columna){
+
+	tableroVisible[fila][columna] = tableroInvisible[fila][columna];
+	if(tableroVisible[fila][columna] == '0')
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
+				if(i == 0 && j == 0)
+				continue;
+
+				int abrirFIla = fila + i;
+				int abrirColumna = columna + j;
+				if(abrirFIla < 0 || abrirFIla >= filasJuego || abrirColumna < 0 || abrirColumna>= columnasJuego)
+					continue;
+				if(tableroVisible[abrirFIla][abrirColumna] == '.')
+					mostrarCelda(abrirFIla, abrirColumna);
+			}
+		}
 }
