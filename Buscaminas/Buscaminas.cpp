@@ -150,3 +150,8 @@ void ponerNumerosFila(int fila){
 	cout << (fila + 1) % 10 << " | ";
 
 }
+
+int numeroAleatoreo(){
+
+	return rand();
+}
