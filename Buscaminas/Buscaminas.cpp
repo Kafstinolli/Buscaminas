@@ -46,10 +46,12 @@ void menuInicio();
 void menuJuego();
 void menuPrincipal();
 void mostrarEstadisticas();
+void iniciarJuego();
 
+int verificarCoordenada(char verificador);
 int validarOpcionMenu(string menu);
 int verificarPartida();
-int verificarCoordenada();
+int verificarOpcionIngresada();
 int numeroAleatoreo();
 
 int main() {
@@ -119,7 +121,12 @@ void limpiarTablero() {
 void iniciarJuego(){
 
 	int opcionMenu;
-	
+	do{
+		menuDificultad();
+		opcionMenu = validarOpcionMenu("Dificultad");
+	}while(opcionMenu < 0);
+	tableroDificultad(opcionMenu);
+	iniciarTablero();
 }
 
 int validarOpcionMenu(string menu){
@@ -133,7 +140,7 @@ int validarOpcionMenu(string menu){
 		return -1;
 	}
 	system("clear");
-	if(!verificarCoordenada()){
+	if(!verificarOpcionIngresada()){
 		if(menu == "Menu"){
 			if(opcionMenu < 1 || opcionMenu > 3){
 				cout << "Opcion invalida";
@@ -158,6 +165,32 @@ int validarOpcionMenu(string menu){
 		return opcionMenu;
 	}
 	return -1;
+}
+
+int verificarCoordenada(char verificador){
+
+		int coordenada;
+		do{
+			cin >> coordenada;
+			if(coordenada == 1234){
+				activarTruco = !activarTruco;
+				cout << "valor del truco: " << activarTruco << endl;
+				coordenada = -1;
+			}
+			else if(!verificarCoordenada()){
+				if(verificador == 'r' && (coordenada > filasJuego ||coordenada < 0)){
+					ingresarCoordenadas(1, filasJuego);
+					coordenada = -1;
+				}
+				if(verificador == 'c' && (coordenada > columnasJuego || coordenada < 0)){
+					ingresarCoordenadas(1, columnasJuego);
+					coordenada = -1;
+				}
+			}
+			else
+				coordenada = -1;
+		}while(coordenada < 0);
+		return coordenada -1;
 }
 
 void crearEstadisticas(){
