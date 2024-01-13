@@ -28,6 +28,7 @@ void dificultadPartida(int dificultad);
 void ponerMinas();
 void ponerNumerosFila(int fila);
 void mostrarCelda(int fila, int columna);
+void ponerBandera(int fila, int columna);
 
 int numeroAleatoreo();
 
@@ -173,4 +174,18 @@ void mostrarCelda(int fila, int columna){
 					mostrarCelda(abrirFIla, abrirColumna);
 			}
 		}
+}
+
+void ponerBandera(int fila, int columna){
+
+	if(tableroVisible[fila][columna] == '.'){
+		if(tableroVisible[fila][columna] == 'F'){
+			tableroVisible[fila][columna] = '.';
+			banderasRestantesJuego++;
+		}
+		else{
+			tableroVisible[fila][columna] = 'F';
+			banderasRestantesJuego--;
+		}
+	}
 }
