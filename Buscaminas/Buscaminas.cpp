@@ -30,6 +30,7 @@ void mostrarCelda(int fila, int columna);
 void ponerBandera(int fila, int columna);
 void estadisticas();
 void mostrarTablero();
+void abrirCelda(int fila, int columna);
 
 int verificarPartida();
 int verificarCoordenada();
@@ -125,6 +126,16 @@ void dificultadPartida(int dificultad){
 		break;
 	}
 	banderasRestantesJuego = minasJuego;
+}
+
+void abrirCelda(int fila, int columna){
+
+	if(tableroInvisible[fila][columna] == 'M'){
+		tableroVisible[fila][columna] = 'x';
+		return;
+	}
+	if(tableroVisible[fila][columna] != 'F')
+		mostrarCelda(fila, columna);
 }
 
 void ponerMinas(){
