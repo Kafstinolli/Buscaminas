@@ -39,6 +39,7 @@ void pintarColumnasUnidades();
 void finalizarJuego();
 void ingresarCoordenadas(int inicio, int fin);
 void crearEstadisticas();
+void iniciarTablero();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -144,6 +145,13 @@ void crearEstadisticas(){
 	juegosGanados = stoi(contenidoEstadisticas[0][1]);
 	juegosPerdidos = stoi(contenidoEstadisticas[1][1]);
 	juegosCancelados = stoi(contenidoEstadisticas[2][1]);
+}
+
+void iniciarTablero(){
+
+	limpiarTablero();
+	ponerMinas();
+	calcularMinasAlrededor();
 }
 
 void dificultadPartida(int dificultad){
