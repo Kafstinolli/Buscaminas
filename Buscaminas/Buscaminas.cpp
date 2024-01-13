@@ -43,6 +43,9 @@ void iniciarTablero();
 void tableroDificultad(int nivel);
 void menuDificultad();
 void menuInicio();
+void menuJuego();
+void menuPrincipal();
+void mostrarEstadisticas();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -307,11 +310,6 @@ void finalizarJuego(){
 	cout << "a finalizado el juego. \n";
 }
 
-void ingresarCoordenadas(int inicio, int fin){
-
-	cout << "ingrese un numero entre " << inicio << " and " << fin << ".\n\n";
-}
-
 void menuDificultad(){
 
 	menuInicio();
@@ -325,7 +323,12 @@ void menuDificultad(){
 void menuJuego(){
 
 	menuInicio();
-	
+	cout << "Banderas restantes:  " << banderasRestantesJuego;
+	cout << "\n*******************************\n\n";
+	ponerTablero();
+	cout << "\n1. Abrir Celda.\n";
+	cout << "2. Poner o quitar bandera.\n";
+	cout << "3. Cancelar Juego.\n";
 
 }
 
@@ -334,10 +337,34 @@ void menuInicio(){
 	cout << "*************buscaminas************" << endl;
 	
 }
+
+void ingresarCoordenadas(int inicio, int fin){
+
+	cout << "ingrese un numero entre " << inicio << " and " << fin << ".\n\n";
+}
+
+void menuPrincipal(){
+
+	menuInicio();
+	cout << endl;
+	cout << "1. Iniciar Juego\n";
+	cout << "2. Ver Estadisticas\n";
+	cout << "3. Finalizar Aplicacion\n";
+}
+
 void mostrarEstadisticas(){
 
 	cout << "digite cualquiere numero paar regresar al menu principal.\n" << endl; 
+	menuInicio();
+	cout << endl;
+	cout << contenidoEstadisticas[0][0] << ": " << juegosGanados << endl; 
+	cout << contenidoEstadisticas[1][0] << ": " << juegosPerdidos << endl;
+	cout << contenidoEstadisticas[2][0] << ": " << juegosCancelados << endl << endl;
 
+	int entrada;
+	do{
+		cin >> entrada;
+	}while(verificarCoordenada());
 }
 
 void ponerNumerosFila(int fila){
