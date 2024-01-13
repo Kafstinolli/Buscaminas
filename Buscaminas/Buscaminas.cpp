@@ -47,6 +47,7 @@ void menuJuego();
 void menuPrincipal();
 void mostrarEstadisticas();
 
+int validarOpcionMenu(string menu);
 int verificarPartida();
 int verificarCoordenada();
 int numeroAleatoreo();
@@ -113,6 +114,50 @@ void limpiarTablero() {
 			tableroInvisible[fila][columna] = '.';
 		}
 	}
+}
+
+void iniciarJuego(){
+
+	int opcionMenu;
+	
+}
+
+int validarOpcionMenu(string menu){
+
+	int opcionMenu;
+	cin >> opcionMenu;
+	if(opcionMenu == 1234){
+		activarTruco = !activarTruco;
+		system("clear");
+		cout << "valor del truco: " << activarTruco << endl;
+		return -1;
+	}
+	system("clear");
+	if(!verificarCoordenada()){
+		if(menu == "Menu"){
+			if(opcionMenu < 1 || opcionMenu > 3){
+				cout << "Opcion invalida";
+				ingresarCoordenadas(1,3);
+				return -1;
+			}
+		}
+		if(menu == "Dificultad"){
+			if(opcionMenu < 1 || opcionMenu > 3){
+				cout << "Opcion invalida";
+				ingresarCoordenadas(1,3);
+				return -1;
+			}
+		}
+		if(menu == "opcion del juego"){
+			if(opcionMenu < 1 || opcionMenu > 3){
+				cout << "Opcion invalida ";
+				ingresarCoordenadas(1,3);
+				return -1;
+			}
+		}
+		return opcionMenu;
+	}
+	return -1;
 }
 
 void crearEstadisticas(){
