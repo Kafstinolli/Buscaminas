@@ -58,7 +58,37 @@ int numeroAleatoreo();
 
 int main() {
 
+	int opcionMenu;
+	int iniciar = 1;
 
+	estadisticas();
+
+	srand(time(NULL));
+
+	while(iniciar){
+		int opcionMenu;
+		system("clear");
+		do{
+			menuPrincipal();
+			opcionMenu = validarOpcionMenu("Menu");
+		}while(opcionMenu < 0);
+		switch(opcionMenu){
+
+			case 1: 
+				iniciarJuego();
+				jugar();
+				break;
+
+			case 2:
+				mostrarEstadisticas();
+				break;
+
+			case 3:
+				finalizarJuego();
+				iniciar = 0;	
+		}
+	}
+	return 0;
 }
 
 void calcularMinasAlrededor() {
