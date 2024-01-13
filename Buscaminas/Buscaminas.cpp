@@ -29,6 +29,7 @@ void ponerNumerosFila(int fila);
 void mostrarCelda(int fila, int columna);
 void ponerBandera(int fila, int columna);
 void estadisticas();
+void mostrarTablero();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -214,5 +215,16 @@ int verificarCoordenada(){
 		cout << "Solo puedes ingresar numeros.";
 		return -1;
 	}
+}
 
+void mostrarTablero(){
+
+	for(int fila = 0; fila < filasJuego; fila++){
+		for(int columna = 0; columna < columnasJuego; columna++){
+			if(tableroVisible[fila][columna] != 'F' && tableroVisible[fila][columna] != 'X')
+				tableroVisible[fila][columna] = tableroInvisible[fila][columna];
+			if(tableroVisible[fila][columna] == 'F' && tableroInvisible[fila][columna] != 'M')
+				tableroVisible[fila][columna] = 'W';	
+		}
+	}
 }
