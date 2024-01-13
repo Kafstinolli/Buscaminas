@@ -22,7 +22,6 @@ char tableroVisible[20][20];
 char tableroInvisible[20][20];
 
 void calcularMinasAlrededor();
-int verificarPartida();
 void limpiarTablero();
 void dificultadPartida(int dificultad);
 void ponerMinas();
@@ -31,6 +30,8 @@ void mostrarCelda(int fila, int columna);
 void ponerBandera(int fila, int columna);
 void estadisticas();
 
+int verificarPartida();
+int verificarCoordenada();
 int numeroAleatoreo();
 
 int main() {
@@ -202,4 +203,16 @@ void estadisticas(){
 		myfile.close();
 	}
 	else cout << "No se puede actualizar estadisticas. \n\n";
+}
+
+int verificarCoordenada(){
+
+	if(cin.fail())
+	{
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		cout << "Solo puedes ingresar numeros.";
+		return -1;
+	}
+
 }
