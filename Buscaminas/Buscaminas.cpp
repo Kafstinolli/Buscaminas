@@ -30,7 +30,7 @@ void ponerNumerosFila(int fila);
 void mostrarCelda(int fila, int columna);
 void ponerBandera(int fila, int columna);
 void estadisticas();
-void mostrarTablero();
+void mostrarTableros();
 void abrirCelda(int fila, int columna);
 void ponerTablero();
 void pintarColumnasArriba();
@@ -47,8 +47,10 @@ void menuJuego();
 void menuPrincipal();
 void mostrarEstadisticas();
 void iniciarJuego();
+void jugar();
 
 int verificarCoordenada(char verificador);
+int verificarEntrada();
 int validarOpcionMenu(string menu);
 int verificarPartida();
 int verificarOpcionIngresada();
@@ -129,6 +131,72 @@ void iniciarJuego(){
 	iniciarTablero();
 }
 
+void jugar(){
+
+	int opcionMenu;
+	int juego = 1;
+	while(juego == 1){
+		system("clear");
+		do{
+			menuJuego();
+			opcionMenu = validarOpcionMenu("opcion jugar");
+		}while(opcionMenu < 0);
+		if(opcionMenu == 3){
+			juego = 3;
+			continue;
+		}
+		menuJuego();
+		cout << "digite la coordenada en X (0 para cancelar).\n";
+		int coordenadaColumna = verificarCoordenada('c');
+		int coordenadaFila;
+		if(coordenadaColumna != -1)
+		{
+			cout << "Digite la coordenada en Y (0 para cancelar).\n";
+			coordenadaFila = verificarCoordenada('r');
+		}
+		if(coordenadaColumna != -1 && coordenadaFila != -1){
+			switch(opcionMenu){
+
+				case 1: abrirCelda(coordenadaFila, coordenadaColumna);
+				break;
+				case 2: ponerBandera(coordenadaFila, coordenadaColumna);
+				break;
+			}
+		}
+		juego = verificarPartida();
+	}
+	mostrarTableros();
+	system("clear");
+
+	switch (juego)
+	{
+	case 1: 
+		cout << "perdiste el juego. \n";
+		juegosPerdidos++;
+		break;
+
+	case 2: 
+		cout << "Ganaste el juego. \n";
+		juegosGanados++;
+		break;
+
+	case 3:
+		cout << "juego cancelado. \n";
+		juegosCancelados++;
+		break;
+	}
+
+	estadisticas();
+
+	cout << "digite cualquier numero par avolver al menu principal.\n" << endl;
+	menuInicio();
+	ponerTablero();
+	int entrada;
+	do{
+		cin >> entrada;
+	}while(verificarEntrada());
+}
+
 int validarOpcionMenu(string menu){
 
 	int opcionMenu;
@@ -177,7 +245,7 @@ int verificarCoordenada(char verificador){
 				cout << "valor del truco: " << activarTruco << endl;
 				coordenada = -1;
 			}
-			else if(!verificarCoordenada()){
+			else if(!verificarEntrada()){
 				if(verificador == 'r' && (coordenada > filasJuego ||coordenada < 0)){
 					ingresarCoordenadas(1, filasJuego);
 					coordenada = -1;
@@ -261,34 +329,6 @@ void tableroDificultad(int nivel){
 		break;
 	}
 
-	banderasRestantesJuego = minasJuego;
-}
-
-void dificultadPartida(int dificultad){
-	
-	switch (dificultad)
-	{
-	case 1:
-		columnasJuego = 10;
-		filasJuego = 8;
-		minasJuego = 10;
-		break;
-
-	case 2:
-		columnasJuego = 18;
-		filasJuego = 14;
-		minasJuego = 40;
-		break;
-
-	case 3:
-		columnasJuego = 20;
-		filasJuego = 20;
-		minasJuego = 99;
-		break;
-	
-	default:
-		break;
-	}
 	banderasRestantesJuego = minasJuego;
 }
 
@@ -383,11 +423,6 @@ void pintarColumnasUnidades(){
 	}
 }
 
-void finalizarJuego(){
-
-	cout << "a finalizado el juego. \n";
-}
-
 void menuDificultad(){
 
 	menuInicio();
@@ -408,6 +443,11 @@ void menuJuego(){
 	cout << "2. Poner o quitar bandera.\n";
 	cout << "3. Cancelar Juego.\n";
 
+}
+
+void finalizarJuego(){
+
+	cout << "a finalizado el juego. \n";
 }
 
 void menuInicio(){
@@ -442,7 +482,7 @@ void mostrarEstadisticas(){
 	int entrada;
 	do{
 		cin >> entrada;
-	}while(verificarCoordenada());
+	}while(verificarEntrada());
 }
 
 void ponerNumerosFila(int fila){
@@ -460,6 +500,8 @@ int numeroAleatoreo(){
 
 	return rand();
 }
+
+
 
 void mostrarCelda(int fila, int columna){
 
@@ -496,7 +538,7 @@ void ponerBandera(int fila, int columna){
 
 void estadisticas(){
 
-	ofstream myfile ("stats");
+	ofstream myfile ("estadisticas");
 	if(myfile.is_open())
 	{
 		myfile << "Ganadas," << juegosGanados << "\n";
@@ -507,7 +549,7 @@ void estadisticas(){
 	else cout << "No se puede actualizar estadisticas. \n\n";
 }
 
-int verificarCoordenada(){
+int verificarEntrada(){
 
 	if(cin.fail())
 	{
@@ -518,7 +560,7 @@ int verificarCoordenada(){
 	}
 }
 
-void mostrarTablero(){
+void mostrarTableros(){
 
 	for(int fila = 0; fila < filasJuego; fila++){
 		for(int columna = 0; columna < columnasJuego; columna++){
