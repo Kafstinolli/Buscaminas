@@ -2,6 +2,7 @@
 #include <fstream>
 #include <climits>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -37,6 +38,7 @@ void pintarColumnasDecenas();
 void pintarColumnasUnidades();
 void finalizarJuego();
 void ingresarCoordenadas(int inicio, int fin);
+void crearEstadisticas();
 
 int verificarPartida();
 int verificarCoordenada();
@@ -104,6 +106,44 @@ void limpiarTablero() {
 			tableroInvisible[fila][columna] = '.';
 		}
 	}
+}
+
+void crearEstadisticas(){
+
+	vector<string> fila;
+	string linea, palabra; 
+
+	fstream file("stadisticas", ios::in);
+	if(file.is_open())
+	{
+		while (getline(file, linea))
+		{
+			fila.clear();
+
+			stringstream str(linea);
+
+			while(getline(str, palabra, ','))
+				fila.push_back(palabra);
+			contenidoEstadisticas.push_back(fila);	
+		}
+	}
+	else
+	{
+		ofstream myfile("estadisticas");
+		if(myfile.is_open())
+		{
+			myfile << "Ganadas,0\n";
+			myfile << "Perdidas,0\n";
+			myfile << "Canceladas,0\n";
+			myfile.close();
+			crearEstadisticas();
+		}
+		else cout << "Error al crear el archivo";
+	}
+
+	juegosGanados = stoi(contenidoEstadisticas[0][1]);
+	juegosPerdidos = stoi(contenidoEstadisticas[1][1]);
+	juegosCancelados = stoi(contenidoEstadisticas[2][1]);
 }
 
 void dificultadPartida(int dificultad){
