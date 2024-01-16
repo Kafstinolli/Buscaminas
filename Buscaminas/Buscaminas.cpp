@@ -17,7 +17,7 @@ int juegosPerdidos;
 int juegosCancelados;
 vector<vector<string>>contenidoEstadisticas;
 
-string estadisticas[3][2];
+string estadistica[3][2];
 
 char tableroVisible[20][20];
 char tableroInvisible[20][20];
@@ -53,7 +53,6 @@ int verificarCoordenada(char verificador);
 int verificarEntrada();
 int validarOpcionMenu(string menu);
 int verificarPartida();
-int verificarOpcionIngresada();
 int numeroAleatoreo();
 
 int main() {
@@ -61,7 +60,7 @@ int main() {
 	int opcionMenu;
 	int iniciar = 1;
 
-	estadisticas();
+	crearEstadisticas();
 
 	srand(time(NULL));
 
@@ -238,7 +237,7 @@ int validarOpcionMenu(string menu){
 		return -1;
 	}
 	system("clear");
-	if(!verificarOpcionIngresada()){
+	if(!verificarEntrada()){
 		if(menu == "Menu"){
 			if(opcionMenu < 1 || opcionMenu > 3){
 				cout << "Opcion invalida";
@@ -296,7 +295,7 @@ void crearEstadisticas(){
 	vector<string> fila;
 	string linea, palabra; 
 
-	fstream file("stadisticas", ios::in);
+	fstream file("estadistica", ios::in);
 	if(file.is_open())
 	{
 		while (getline(file, linea))
@@ -312,7 +311,7 @@ void crearEstadisticas(){
 	}
 	else
 	{
-		ofstream myfile("estadisticas");
+		ofstream myfile("estadistica");
 		if(myfile.is_open())
 		{
 			myfile << "Ganadas,0\n";
@@ -521,7 +520,7 @@ void ponerNumerosFila(int fila){
 		cout << ((fila + 1) / 10) % 1;
 	}
 	else{
-		cout << '  ';
+		cout << ' ';
 	}
 	cout << (fila + 1) % 10 << " | ";
 }
@@ -568,11 +567,11 @@ void ponerBandera(int fila, int columna){
 
 void estadisticas(){
 
-	ofstream myfile ("estadisticas");
+	ofstream myfile ("estadistica");
 	if(myfile.is_open())
 	{
 		myfile << "Ganadas," << juegosGanados << "\n";
-		myfile << "Perdidas," << juegosPerdidos << "n";
+		myfile << "Perdidas," << juegosPerdidos << "\n";
 		myfile << "Canceladas," << juegosCancelados << "\n";
 		myfile.close();
 	}
@@ -588,6 +587,7 @@ int verificarEntrada(){
 		cout << "Solo puedes ingresar numeros.";
 		return -1;
 	}
+	return 0;
 }
 
 void mostrarTableros(){
